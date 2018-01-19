@@ -1,0 +1,174 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gs.tools.colorhound</groupId>
+    <artifactId>color-hound</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <name>color-hound</name>
+    <url>http://maven.apache.org</url>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.gs.tools.colorhound.ColorHound</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <addExtensions>false</addExtensions>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <classpathMavenRepositoryLayout>false</classpathMavenRepositoryLayout>
+                        </manifest>
+                        
+                    </archive>
+					
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${release.dir}/${project.artifactId}-${project.version}/lib/</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <useRepositoryLayout>false</useRepositoryLayout>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <!-- Coping JAR to release directory -->
+                    <execution>
+                        <id>defaultcopy</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <!-- Coping JAR to release directory -->
+                                <copy todir="${release.dir}/${project.artifactId}-${project.version}/"
+                                      overwrite="true" failonerror="true" includeEmptyDirs="true">
+                                    <fileset dir="target">
+                                        <include name="${project.artifactId}-${project.version}.jar" />
+                                    </fileset>
+                                </copy>
+                                
+                                
+                                <copy todir="${release.dir}/${project.artifactId}-${project.version}/"
+                                      overwrite="true" failonerror="true" includeEmptyDirs="true">
+                                    <fileset dir="${bin.dir}">
+                                        <include name="ColorHound-${project.version}.exe" />
+                                    </fileset>
+                                </copy>
+                                
+                                <!--
+                                <copy todir="${release.dir}/${artifactId}-${release.version}/help/"
+                                      overwrite="true" failonerror="true" includeEmptyDirs="true">
+                                    <fileset dir="${help.dir}">
+                                        <include name="gsplit-help-${release.version}.html" />
+                                    </fileset>
+                                </copy>
+                                -->
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.test.skip>true</maven.test.skip>
+        <release.dir>../dist/</release.dir>
+        <bin.dir>../bin/</bin.dir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.gs.utils</groupId>
+            <artifactId>gs-utils</artifactId>
+            <version>1.0.02.2010</version>
+            <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging-api</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>sax</artifactId>
+                    <groupId>sax</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>castor</artifactId>
+                    <groupId>castor</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xercesImpl</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>poi</artifactId>
+                    <groupId>org.apache.poi</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+    </dependencies>
+</project>

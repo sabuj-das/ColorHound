@@ -1,0 +1,28 @@
+<launch4jConfig>
+  <dontWrapJar>true</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>.\color-hound-1.0.jar</jar>
+  <outfile>D:\SVN_HOME\demo-projects\trunk\Tools\ColorHound\dist\color-hound-1.0\ColorHound-1.0.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <customProcName>true</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon>D:\SVN_HOME\demo-projects\trunk\Tools\ColorHound\sample-img\color-picker.ico</icon>
+  <singleInstance>
+    <mutexName>COLOR_HOUND_1.1</mutexName>
+    <windowTitle></windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <minVersion>1.6.0_00</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <initialHeapSize>64</initialHeapSize>
+    <maxHeapSize>256</maxHeapSize>
+  </jre>
+</launch4jConfig>
